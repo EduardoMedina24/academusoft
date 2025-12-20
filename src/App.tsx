@@ -1,7 +1,13 @@
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import Users from './pages/Users';
+
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import Subjects from './pages/Subjects';
+import Enrollments from './pages/Enrollments';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -18,6 +24,7 @@ import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
+import SubjectDetail from './pages/SubjectDetail';
 
 /**
  * Ionic Dark Mode
@@ -38,14 +45,28 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-      </IonRouterOutlet>
+<IonRouterOutlet>
+  <Route exact path="/">
+    <Redirect to="/login" />
+  </Route>
+
+  <Route exact path="/login">
+    <Login />
+  </Route>
+<Route path="/subjects/:id" component={SubjectDetail} exact />
+
+<Route exact path="/dashboard">
+  <Dashboard />
+</Route>
+<Route exact path="/users">
+  <Users />
+</Route>
+<Route path="/enrollments" component={Enrollments} exact />
+
+<Route path="/subjects" component={Subjects} exact />
+
+</IonRouterOutlet>
+
     </IonReactRouter>
   </IonApp>
 );
